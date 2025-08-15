@@ -4,8 +4,9 @@ plugins {
     id 'net.neoforged.gradle.userdev' version '7.0.165'
 }
 base {
-    archivesName = "${mod_id}-NeoForge-${minecraft_version}"
+    archivesName = "DecorativeBlocks-Reborn-neoforge-${minecraft_version}"
 }
+
 if (file('src/main/resources/META-INF/accesstransformer.cfg').exists()) {
     minecraft.accessTransformers.file file('src/main/resources/META-INF/accesstransformer.cfg')
 }
