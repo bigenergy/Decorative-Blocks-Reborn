@@ -8,8 +8,8 @@
     "${mod_author}"
   ],
   "contact": {
-    "sources": "https://github.com/lilypuree/Decorative-Blocks",
-    "issues": "https://github.com/lilypuree/Decorative-Blocks/issues"
+    "sources": "https://github.com/bigenergy/Decorative-Blocks-Reborn",
+    "issues": "https://github.com/bigenergy/Decorative-Blocks-Reborn/issues"
   },
   "license": "${mod_license}",
   "icon" : "logo.png",
