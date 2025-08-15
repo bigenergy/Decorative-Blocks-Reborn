@@ -54,7 +54,7 @@
   "block.decorative_blocks.bonfire":"Костёр",
   "block.decorative_blocks.soul_bonfire":"Костёр душ",
   "block.decorative_blocks.lattice":"Решётка",
-  "fluid.decorative_blocks.thatch":"Солома",
+  "fluid_type.decorative_blocks.thatch": "Солома",
   "block.decorative_blocks.thatch":"Солома",
   "wiki.decorative_blocks.thatch":"Используйте ножницы на стоге сена",
   "wiki.decorative_blocks.support.condition1":"§Нажмите [ПКМ] крадучись по воздуху,",
@@ -65,7 +65,7 @@
   "wiki.decorative_blocks.support.behavior3":"§3чтобы скрыть/показать боковую сторону",
   "wiki.decorative_blocks.seat":"§3Нажмите [ПКМ] крадучись по воздуху для переключения между состояниями",
   "wiki.decorative_blocks.copy1":"§3Использование по умолчанию - вставить, крадучись - скопировать",
-  "wiki.decorative_blocks.copy2":"§3Скопированно: %s",
+  "wiki.decorative_blocks.copy2":"§3Скопировано: %s",
   "message.decorative_blocks.invalid_bonfire_activator_config":"Ошибка в файле конфигурации при активации костра!",
   "key.decorative_blocks.switch_item_state": "Переключить состояние предмета"
 }
