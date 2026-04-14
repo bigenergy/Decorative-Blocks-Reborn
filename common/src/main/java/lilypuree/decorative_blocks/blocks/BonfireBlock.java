@@ -90,7 +90,7 @@ public class BonfireBlock extends Block implements SimpleWaterloggedBlock {
     }
     @Override
     public boolean canPlaceLiquid(@Nullable Player player, BlockGetter worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
-        return false;
+        return fluidIn == Fluids.WATER;
     }
 
     @Override
