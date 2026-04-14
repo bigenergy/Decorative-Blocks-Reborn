@@ -11,24 +11,18 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
 
-public class BonfireBlock extends Block implements SimpleWaterloggedBlock {
+public class BonfireBlock extends Block {
     public BonfireBlock(Properties properties) {
         super(properties);
     }
@@ -88,25 +82,15 @@ public class BonfireBlock extends Block implements SimpleWaterloggedBlock {
             worldIn.addParticle(ParticleTypes.LARGE_SMOKE, x, y, z, -0.03 + rand.nextDouble() * 0.06, +rand.nextDouble() * 0.1, -0.03 + rand.nextDouble() * 0.06);
         }
     }
-    @Override
-    public boolean canPlaceLiquid(@Nullable Player player, BlockGetter worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
-        return fluidIn == Fluids.WATER;
-    }
 
     @Override
-    public boolean placeLiquid(LevelAccessor worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
-        if (fluidStateIn.getType() == Fluids.WATER) {
-            if (!worldIn.isClientSide()) {
-                worldIn.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
-                worldIn.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1.2f, 0.6f);
-            } else {
-                spawnExtinguishSmoke(worldIn, pos);
-            }
-            return true;
-        } else
-            return false;
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (!state.is(newState.getBlock()) && newState.getFluidState().isSource()) {
+            level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1.2f, 0.6f);
+            spawnExtinguishSmoke(level, pos);
+        }
+        super.onRemove(state, level, pos, newState, movedByPiston);
     }
-
 
     public static void spawnExtinguishSmoke(LevelAccessor world, BlockPos pos) {
         RandomSource rand = world.getRandom();
