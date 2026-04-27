@@ -13,11 +13,12 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -45,7 +46,7 @@ public class BonfireBlock extends Block {
     }
 
     @Override
-    public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
+    public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn, InsideBlockEffectApplier applier, boolean isPrecise) {
         if (!entityIn.fireImmune() && entityIn instanceof LivingEntity) {
             entityIn.hurt(entityIn.damageSources().inFire(), 1.0F);
             if (Services.PLATFORM.isModLoaded("soul_fire_d")) {
@@ -53,7 +54,7 @@ public class BonfireBlock extends Block {
             } else
                 entityIn.igniteForSeconds(3);
         }
-        super.entityInside(state, worldIn, pos, entityIn);
+        super.entityInside(state, worldIn, pos, entityIn, applier, isPrecise);
     }
 
 
@@ -84,27 +85,7 @@ public class BonfireBlock extends Block {
     }
 
     @Override
-    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (!state.is(newState.getBlock()) && newState.getFluidState().isSource()) {
-            level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1.2f, 0.6f);
-            spawnExtinguishSmoke(level, pos);
-        }
-        super.onRemove(state, level, pos, newState, movedByPiston);
-    }
-
-    public static void spawnExtinguishSmoke(LevelAccessor world, BlockPos pos) {
-        RandomSource rand = world.getRandom();
-        for (int i = 0; i < 5; ++i) {
-            double d0 = world.getRandom().nextGaussian() * 0.02D;
-            double d1 = world.getRandom().nextGaussian() * 0.02D;
-            double d2 = world.getRandom().nextGaussian() * 0.02D;
-            world.addParticle(ParticleTypes.CLOUD, pos.getX() + (double) (rand.nextFloat()), pos.getY() + 0.4D + (double) (rand.nextFloat()), pos.getZ() + (double) (rand.nextFloat()), d0, d1, d2);
-        }
-        world.addParticle(ParticleTypes.SMOKE, (double) pos.getX() + 0.25D + rand.nextDouble() / 2.0D * (double) (rand.nextBoolean() ? 1 : -1), (double) pos.getY() + 0.4D, (double) pos.getZ() + 0.25D + rand.nextDouble() / 2.0D * (double) (rand.nextBoolean() ? 1 : -1), 0.0D, 0.005D, 0.0D);
-    }
-
-    @Override
-    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
+    public BlockState updateShape(BlockState stateIn, LevelReader worldIn, ScheduledTickAccess tickAccess, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource random) {
         return this.canSurvive(stateIn, worldIn, currentPos) ? stateIn : Blocks.AIR.defaultBlockState();
     }
 

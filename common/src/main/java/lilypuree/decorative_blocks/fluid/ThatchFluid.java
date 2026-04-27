@@ -2,7 +2,7 @@ package lilypuree.decorative_blocks.fluid;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
@@ -88,7 +88,7 @@ public abstract class ThatchFluid extends FlowingFluid {
     }
 
     @Override
-    protected boolean canConvertToSource(Level level) {
+    protected boolean canConvertToSource(net.minecraft.server.level.ServerLevel level) {
         return false;
     }
 
@@ -182,8 +182,8 @@ public abstract class ThatchFluid extends FlowingFluid {
 
     public record FluidReferenceHolder(Supplier<Block> sourceBlock, Supplier<LiquidBlock> liquidBlock,
                                        Supplier<FlowingFluid> flowing, Supplier<FlowingFluid> source,
-                                       ResourceLocation thatchStillTexture,
-                                       ResourceLocation thatchFlowingTexture, int color) {
+                                       Identifier thatchStillTexture,
+                                       Identifier thatchFlowingTexture, int color) {
 
 
         public Block getSourceBlock() {

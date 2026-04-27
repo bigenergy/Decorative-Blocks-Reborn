@@ -3,6 +3,8 @@ package lilypuree.decorative_blocks;
 import lilypuree.decorative_blocks.fluid.ThatchBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -18,14 +20,14 @@ public class FabricThatchFluidBlock extends LiquidBlock implements ThatchBlock {
     }
 
     @Override
-    public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
+    protected void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn, InsideBlockEffectApplier applier, boolean flag) {
         if (entityIn instanceof Player player) {
             playSoundIfMoving(player, worldIn, pos);
         }
     }
 
     @Override
-    public ItemStack pickupBlock(@Nullable Player player, LevelAccessor level, BlockPos pos, BlockState state) {
+    public ItemStack pickupBlock(@Nullable LivingEntity entity, LevelAccessor level, BlockPos pos, BlockState state) {
         return ItemStack.EMPTY;
     }
 }

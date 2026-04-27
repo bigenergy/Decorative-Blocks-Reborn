@@ -3,7 +3,6 @@
   "package": "lilypuree.decorative_blocks.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "FogRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -5,8 +5,10 @@ import lilypuree.decorative_blocks.entity.DummyEntityForSitting;
 import lilypuree.decorative_blocks.fluid.ThatchFluid;
 import lilypuree.decorative_blocks.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.CreativeModeTab;
@@ -20,8 +22,8 @@ import net.minecraft.world.level.material.PushReaction;
 import java.util.function.Supplier;
 
 public class Registration {
-    private static final ResourceLocation thatchStillTexture = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "block/thatch_still");
-    private static final ResourceLocation thatchFlowingTexture = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "block/thatch_flowing");
+    private static final Identifier thatchStillTexture = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "block/thatch_still");
+    private static final Identifier thatchFlowingTexture = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "block/thatch_flowing");
 
     public static final ThatchFluid.FluidReferenceHolder referenceHolder;
     public static final Supplier<ThatchFluid.Flowing> FLOWING_THATCH;
@@ -33,7 +35,9 @@ public class Registration {
     static {
         ITEM_GROUP = Services.PLATFORM.register(BuiltInRegistries.CREATIVE_MODE_TAB, "general", Registration::getTab);
 
-        BlockBehaviour.Properties thatchProperties = Block.Properties.of().liquid().replaceable().noCollission().randomTicks().noLootTable()
+        BlockBehaviour.Properties thatchProperties = Block.Properties.of()
+                .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Constants.MOD_ID, "thatch")))
+                .liquid().replaceable().noCollision().randomTicks().noLootTable()
                 .mapColor(MapColor.COLOR_YELLOW).pushReaction(PushReaction.DESTROY).strength(100.0F);
 
         //using lambdas, not method references which will access the field values of FLOWING_THATCH and STILL_THATCH which are still null.
@@ -48,7 +52,7 @@ public class Registration {
                     .clientTrackingRange(256)
                     .updateInterval(20)
                     .sized(0.0001F, 0.0001F)
-                    .build(Constants.MOD_ID + ":dummy"));
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(Constants.MOD_ID, "dummy_entity"))));
 
     public static void init() {
     }

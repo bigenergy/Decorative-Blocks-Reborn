@@ -5,11 +5,9 @@ import lilypuree.decorative_blocks.entity.EmptyRenderer;
 import lilypuree.decorative_blocks.fluid.ThatchFluid;
 import lilypuree.decorative_blocks.registration.Registration;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.renderer.RenderType;
 
 
 public class ClientInitializer implements ClientModInitializer {
@@ -24,7 +22,6 @@ public class ClientInitializer implements ClientModInitializer {
     }
 
     public static void registerThatchlike(ThatchFluid.FluidReferenceHolder referenceHolder) {
-        BlockRenderLayerMap.INSTANCE.putBlock(referenceHolder.getLiquidBlock(), RenderType.solid());
         FluidRenderHandlerRegistry.INSTANCE.register(referenceHolder.getSourceFluid(), referenceHolder.getFlowingFluid(),
                 new SimpleFluidRenderHandler(referenceHolder.thatchStillTexture(), referenceHolder.thatchFlowingTexture()));
     }

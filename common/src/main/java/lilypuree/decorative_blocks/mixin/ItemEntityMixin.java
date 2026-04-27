@@ -31,7 +31,7 @@ public abstract class ItemEntityMixin extends Entity {
     public void onHurt(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (source == this.damageSources().inFire() && this.getItem().is(DBTags.Items.BONFIRE_ACTIVATORS)) {
             Level level = this.level();
-            if (level.isClientSide || this.isRemoved()) cir.setReturnValue(false);
+            if (level.isClientSide() || this.isRemoved()) cir.setReturnValue(false);
             else {
                 Block block = level.getBlockState(this.blockPosition()).getBlock();
                 if (CommonAPI.bonfireMap.containsKey(block)) {

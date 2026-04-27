@@ -64,6 +64,6 @@ public class BarPanelBlock extends TrapDoorBlock {
             level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
         this.playSound(player, level, pos, state.getValue(OPEN));
-        return InteractionResult.sidedSuccess(level.isClientSide);
+        return InteractionResult.SUCCESS;
     }
 }

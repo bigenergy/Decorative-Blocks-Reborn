@@ -10,7 +10,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -38,11 +37,11 @@ public class Callbacks {
         return false;
     }
 
-    public static InteractionResultHolder<ItemStack> onUseItem(Level level, Player player, ItemStack item) {
+    public static InteractionResult onUseItem(Level level, Player player, ItemStack item) {
         if (item.is(ItemTags.HOES)) {
             return pickupThatch(level, player, item);
         }
-        return InteractionResultHolder.pass(item);
+        return InteractionResult.PASS;
     }
 
     public static InteractionResult onRightClickBlock(Player player, Level level, ItemStack item, BlockHitResult hitResult) {
@@ -54,24 +53,25 @@ public class Callbacks {
             return shearThatch(player, level, item, pos, block);
         } else if (item.is(ItemTags.AXES) && block instanceof SupportBlock) {
             SupportBlock.onSupportActivation(state, level, pos, player, hitResult.getLocation());
-            return InteractionResult.sidedSuccess(level.isClientSide);
+            return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
     }
 
 
     private static InteractionResult shearThatch(Player player, Level level, ItemStack itemStack, BlockPos pos, Block block) {
-        if (!level.getGameRules().getBoolean(CommonAPI.RULE_DISABLE_THATCH)) {
+        boolean disabled = level instanceof net.minecraft.server.level.ServerLevel sl && sl.getGameRules().get(CommonAPI.RULE_DISABLE_THATCH);
+        if (!disabled) {
             level.setBlockAndUpdate(pos, CommonAPI.shearMap.get(block).getLiquidBlock().defaultBlockState());
             level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
             player.playSound(SoundEvents.CROP_BREAK, 1.2F, 1.0F);
             itemStack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
-            return InteractionResult.sidedSuccess(level.isClientSide);
+            return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
     }
 
-    private static InteractionResultHolder<ItemStack> pickupThatch(Level level, Player player, ItemStack item) {
+    private static InteractionResult pickupThatch(Level level, Player player, ItemStack item) {
         BlockHitResult blockHitResult = ItemAccessor.getPlayerPOVHitResult(level, player, ClipContext.Fluid.SOURCE_ONLY);
         if (blockHitResult.getType() == HitResult.Type.BLOCK) {
             BlockPos hit = blockHitResult.getBlockPos();
@@ -85,11 +85,11 @@ public class Callbacks {
                         player.playSound(SoundEvents.CROP_BREAK, 1.2f, 1.0F);
                         level.gameEvent(player, GameEvent.BLOCK_DESTROY, hit);
                         level.setBlock(hit, Blocks.AIR.defaultBlockState(), 11);
-                        return InteractionResultHolder.sidedSuccess(item, level.isClientSide);
+                        return InteractionResult.SUCCESS;
                     }
                 }
             }
         }
-        return InteractionResultHolder.pass(item);
+        return InteractionResult.PASS;
     }
 }

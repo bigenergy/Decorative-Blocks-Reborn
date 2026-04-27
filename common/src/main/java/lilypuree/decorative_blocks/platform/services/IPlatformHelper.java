@@ -2,15 +2,13 @@ package lilypuree.decorative_blocks.platform.services;
 
 import lilypuree.decorative_blocks.entity.DummyEntityForSitting;
 import lilypuree.decorative_blocks.fluid.ThatchFluid;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.gamerules.GameRule;
+import net.minecraft.world.level.gamerules.GameRuleCategory;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -24,7 +22,7 @@ public interface IPlatformHelper {
 
     <I, T extends I> Supplier<T> register(Registry<I> registry, String name, Supplier<T> sup);
 
-    GameRules.Key<GameRules.BooleanValue> registerGameRule(String name, GameRules.Category category, boolean defaultValue);
+    GameRule<Boolean> registerGameRule(String name, GameRuleCategory category, boolean defaultValue);
 
     DummyEntityForSitting createDummyEntity(EntityType<DummyEntityForSitting> type, Level level);
 
@@ -39,10 +37,6 @@ public interface IPlatformHelper {
     }
 
     CreativeModeTab.Builder createModTab();
-
-    void setRenderLayer(Block block, RenderType renderType);
-
-    void registerItemFunc(Item item, ResourceLocation name, ItemPropertyFunction func);
 
     TagKey<Item> getShearTag();
 }

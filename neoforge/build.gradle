@@ -1,7 +1,7 @@
 plugins {
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.165'
+    id 'net.neoforged.gradle.userdev' version '7.1.+'
 }
 base {
     archivesName = "DecorativeBlocks-Reborn-neoforge-${minecraft_version}"
@@ -29,7 +29,7 @@ runs {
         systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
     }
 
-    data {
+    clientData {
         programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('../common/src/main/resources/').getAbsolutePath()
     }
 }
@@ -45,7 +45,7 @@ dependencies {
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
     // at runtime, use the full JEI jar
     runtimeOnly "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
-    implementation "curse.maven:soul-fire-d-662413:6248773"
+    implementation "curse.maven:soul-fire-d-662413:7365044"
 }
 
 // NeoGradle compiles the game, but we don't want to add our common code to the game's code

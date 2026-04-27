@@ -6,19 +6,14 @@ import lilypuree.decorative_blocks.fluid.ForgeThatchFluid;
 import lilypuree.decorative_blocks.fluid.ForgeThatchFluidBlock;
 import lilypuree.decorative_blocks.fluid.ThatchFluid;
 import lilypuree.decorative_blocks.platform.services.IPlatformHelper;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.gamerules.GameRule;
+import net.minecraft.world.level.gamerules.GameRuleCategory;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.fml.ModList;
@@ -47,8 +42,16 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
 
 
     @Override
-    public GameRules.Key<GameRules.BooleanValue> registerGameRule(String name, GameRules.Category category, boolean defaultValue) {
-        return GameRules.register(name, category, GameRules.BooleanValue.create(defaultValue));
+    @SuppressWarnings("unchecked")
+    public GameRule<Boolean> registerGameRule(String name, GameRuleCategory category, boolean defaultValue) {
+        try {
+            java.lang.reflect.Method m = net.minecraft.world.level.gamerules.GameRules.class
+                    .getDeclaredMethod("registerBoolean", String.class, GameRuleCategory.class, boolean.class);
+            m.setAccessible(true);
+            return (GameRule<Boolean>) m.invoke(null, name, category, defaultValue);
+        } catch (ReflectiveOperationException e) {
+            throw new RuntimeException("Failed to register game rule " + name, e);
+        }
     }
 
     @Override
@@ -74,16 +77,6 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
     @Override
     public CreativeModeTab.Builder createModTab() {
         return CreativeModeTab.builder();
-    }
-
-    @Override
-    public void setRenderLayer(Block block, RenderType renderType) {
-        ItemBlockRenderTypes.setRenderLayer(block, renderType);
-    }
-
-    @Override
-    public void registerItemFunc(Item item, ResourceLocation name, ItemPropertyFunction func) {
-        ItemProperties.register(item, name, func);
     }
 
     @Override

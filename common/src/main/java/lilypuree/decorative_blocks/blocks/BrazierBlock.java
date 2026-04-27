@@ -9,7 +9,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -21,7 +21,10 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -48,13 +51,13 @@ public class BrazierBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
+    public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn, InsideBlockEffectApplier applier, boolean isPrecise) {
         if (!entityIn.fireImmune() && state.getValue(LIT) && entityIn instanceof LivingEntity) {
             if (entityIn.getY() >= state.getCollisionShape(worldIn, pos).max(Direction.Axis.Y) + pos.getY() - 0.1f) {
                 entityIn.hurt(entityIn.damageSources().campfire(), 1.0F);
             }
         }
-        super.entityInside(state, worldIn, pos, entityIn);
+        super.entityInside(state, worldIn, pos, entityIn, applier, isPrecise);
     }
 
 
@@ -67,21 +70,21 @@ public class BrazierBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
+    public BlockState updateShape(BlockState stateIn, LevelReader worldIn, ScheduledTickAccess tickAccess, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource random) {
         if (stateIn.getValue(WATERLOGGED)) {
-            worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+            tickAccess.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
         }
-        return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+        return super.updateShape(stateIn, worldIn, tickAccess, currentPos, facing, facingPos, facingState, random);
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (state.getValue(LIT)) {
             if (stack.getItem() instanceof ShovelItem) {
                 level.playSound(null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 0.8F, 1.0F);
 
                 level.setBlockAndUpdate(pos, state.setValue(LIT, Boolean.FALSE));
-                return ItemInteractionResult.SUCCESS;
+                return InteractionResult.SUCCESS;
             }
         } else if (!state.getValue(WATERLOGGED)) {
             if (hit.getDirection() == Direction.UP && stack.getItem() == Items.FLINT_AND_STEEL || stack.getItem() == Items.FIRE_CHARGE) {
@@ -90,7 +93,7 @@ public class BrazierBlock extends Block implements SimpleWaterloggedBlock {
                 level.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, level.random.nextFloat() * 0.4F + 0.8F);
 
                 level.setBlockAndUpdate(pos, state.setValue(LIT, true));
-                return ItemInteractionResult.SUCCESS;
+                return InteractionResult.SUCCESS;
 
             }
         }
@@ -132,7 +135,7 @@ public class BrazierBlock extends Block implements SimpleWaterloggedBlock {
     @Override
     public void onProjectileHit(Level worldIn, BlockState state, BlockHitResult hit, Projectile projectile) {
         BlockPos pos = hit.getBlockPos();
-        if (!worldIn.isClientSide && projectile.isOnFire() && projectile.mayInteract(worldIn, pos) && !state.getValue(LIT) && !state.getValue(WATERLOGGED)) {
+        if (worldIn instanceof net.minecraft.server.level.ServerLevel sl && projectile.isOnFire() && projectile.mayInteract(sl, pos) && !state.getValue(LIT) && !state.getValue(WATERLOGGED)) {
             worldIn.setBlock(pos, state.setValue(BlockStateProperties.LIT, Boolean.TRUE), 11);
         }
     }

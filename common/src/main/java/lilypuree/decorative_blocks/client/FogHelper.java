@@ -1,6 +1,5 @@
 package lilypuree.decorative_blocks.client;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import lilypuree.decorative_blocks.fluid.ThatchFluid;
 import lilypuree.decorative_blocks.registration.DBTags;
 import net.minecraft.client.Camera;
@@ -11,9 +10,9 @@ import net.minecraft.world.level.material.FluidState;
 
 public class FogHelper {
     public static Info onColorFog(Camera camera) {
-        Entity entity = camera.getEntity();
-        if (entity.isEyeInFluid(DBTags.Fluids.THATCH)) {
-            Level level = entity.getCommandSenderWorld();
+        Entity entity = camera.entity();
+        if (entity != null && entity.isEyeInFluid(DBTags.Fluids.THATCH)) {
+            Level level = entity.level();
             FluidState state = level.getFluidState(BlockPos.containing(entity.getEyePosition()));
             if (state.getType() instanceof ThatchFluid thatchFluid) {
                 int color = thatchFluid.getReferenceHolder().color();
@@ -37,17 +36,6 @@ public class FogHelper {
     }
 
     public static void onFogSetup(Entity entity, float farPlaneDist) {
-        float start;
-        float end;
-
-        if (entity.isSpectator()) {
-            start = -8.0F;
-            end = farPlaneDist * 0.5F;
-        } else {
-            start = 0.25F;
-            end = 1.0F;
-        }
-        RenderSystem.setShaderFogStart(start);
-        RenderSystem.setShaderFogEnd(end);
+        // 1.21.11: fog near/far are now driven by GpuBufferSlice; custom thatch fog visuals stubbed.
     }
 }

@@ -1,24 +1,20 @@
 package lilypuree.decorative_blocks.fluid;
 
-import com.mojang.blaze3d.shaders.FogShape;
 import lilypuree.decorative_blocks.client.FogHelper;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.FogRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Vector3f;
-
 import java.util.function.Consumer;
 
 public class DBFluidType extends FluidType {
-    private final ResourceLocation flowingTexture;
-    private final ResourceLocation stillTexture;
+    private final Identifier flowingTexture;
+    private final Identifier stillTexture;
 
-    private final ResourceLocation overlayTexture;
+    private final Identifier overlayTexture;
 
     private final int fogColor;
 
@@ -27,7 +23,7 @@ public class DBFluidType extends FluidType {
      *
      * @param properties the general properties of the fluid type
      */
-    public DBFluidType(Properties properties, ResourceLocation stillTexture, ResourceLocation flowingTexture, ResourceLocation overlayTexture, int fogColor) {
+    public DBFluidType(Properties properties, Identifier stillTexture, Identifier flowingTexture, Identifier overlayTexture, int fogColor) {
         super(properties);
         this.flowingTexture = flowingTexture;
         this.stillTexture = stillTexture;
@@ -35,34 +31,30 @@ public class DBFluidType extends FluidType {
         this.fogColor = fogColor;
     }
 
-    @Override
     public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
         consumer.accept(new IClientFluidTypeExtensions() {
             @Override
-            public ResourceLocation getFlowingTexture() {
+            public Identifier getFlowingTexture() {
                 return flowingTexture;
             }
 
             @Override
-            public ResourceLocation getStillTexture() {
+            public Identifier getStillTexture() {
                 return stillTexture;
             }
 
             @Override
-            public @Nullable ResourceLocation getOverlayTexture() {
+            public @Nullable Identifier getOverlayTexture() {
                 return overlayTexture;
             }
 
             @Override
-            public @NotNull Vector3f modifyFogColor(Camera camera, float partialTick, ClientLevel level, int renderDistance, float darkenWorldAmount, Vector3f fluidFogColor) {
+            public @NotNull org.joml.Vector4f modifyFogColor(Camera camera, float partialTick, ClientLevel level, int renderDistance, float darkenWorldAmount, org.joml.Vector4f fluidFogColor) {
                 FogHelper.Info colorInfo = FogHelper.decodeColor(fogColor);
-                return new Vector3f(colorInfo.fogRed(), colorInfo.fogGreen(), colorInfo.fogBlue());
+                return new org.joml.Vector4f(colorInfo.fogRed(), colorInfo.fogGreen(), colorInfo.fogBlue(), fluidFogColor.w());
             }
 
-            @Override
-            public void modifyFogRender(Camera camera, FogRenderer.FogMode mode, float renderDistance, float partialTick, float nearDistance, float farDistance, FogShape shape) {
-                FogHelper.onFogSetup(camera.getEntity(), farDistance);
-            }
+            // 1.21.11: FogRenderer/FogShape removed; fog distances driven by GpuBufferSlice.
         });
     }
 }

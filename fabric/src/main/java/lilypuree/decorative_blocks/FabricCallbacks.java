@@ -9,7 +9,7 @@ public class FabricCallbacks {
     public static void initCallbacks() {
         AttackBlockCallback.EVENT.register(((player, world, hand, pos, direction) -> {
             if (Callbacks.onLeftClick(world, pos)) {
-                return InteractionResult.sidedSuccess(world.isClientSide);
+                return InteractionResult.SUCCESS;
             }
             return InteractionResult.PASS;
         }));

@@ -1,11 +1,15 @@
 package lilypuree.decorative_blocks.registration;
 
 import com.google.common.collect.ImmutableMap;
+import lilypuree.decorative_blocks.Constants;
 import lilypuree.decorative_blocks.blocks.*;
 import lilypuree.decorative_blocks.blocks.types.VanillaWoodTypes;
 import lilypuree.decorative_blocks.blocks.types.WoodDecorativeBlockTypes;
 import lilypuree.decorative_blocks.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -37,31 +41,44 @@ public class DBBlocks {
     public static final ImmutableMap<WoodType, BlockWrapper<SupportBlock>> SUPPORTS;
     public static final ImmutableMap<WoodType, BlockWrapper<SeatBlock>> SEATS;
 
+    public static ResourceKey<Block> blockKey(String name) {
+        return ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Constants.MOD_ID, name));
+    }
+
+    private static BlockBehaviour.Properties baseProps(String name) {
+        return BlockBehaviour.Properties.of().setId(blockKey(name));
+    }
+
     static {
-        BlockBehaviour.Properties chainProperties = Block.Properties.of().mapColor(MapColor.METAL).strength(4.3F).sound(SoundType.METAL).noOcclusion();
- 
-
-        BlockBehaviour.Properties bonfire = BlockBehaviour.Properties.of().sound(SoundType.WOOL).strength(0).mapColor(MapColor.FIRE).pushReaction(PushReaction.DESTROY).replaceable().noCollission().lightLevel(state -> 15).noLootTable();
-        BlockBehaviour.Properties soul_bonfire = BlockBehaviour.Properties.of().sound(SoundType.WOOL).strength(0).mapColor(MapColor.COLOR_CYAN).pushReaction(PushReaction.DESTROY).replaceable().noCollission().lightLevel(state -> 14).noLootTable();
-        BlockBehaviour.Properties chandelier = BlockBehaviour.Properties.of().sound(SoundType.WOOD).strength(0.3f).pushReaction(PushReaction.DESTROY).replaceable().noCollission().noOcclusion().lightLevel(state -> 15);
-        BlockBehaviour.Properties soul_chandelier = BlockBehaviour.Properties.of().sound(SoundType.WOOD).strength(0.3f).pushReaction(PushReaction.DESTROY).replaceable().noCollission().noOcclusion().lightLevel(state -> 11);
-        BlockBehaviour.Properties brazier = BlockBehaviour.Properties.of().sound(SoundType.METAL).strength(3.0f).mapColor(MapColor.METAL).noOcclusion().lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 15 : 0);
-        BlockBehaviour.Properties soul_brazier = BlockBehaviour.Properties.of().sound(SoundType.METAL).strength(3.0f).mapColor(MapColor.METAL).noOcclusion().lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 10 : 0);
-        BlockBehaviour.Properties bar_panel = BlockBehaviour.Properties.of().sound(SoundType.METAL).strength(5.0f).mapColor(MapColor.METAL).noOcclusion();
-        BlockBehaviour.Properties lattice = BlockBehaviour.Properties.of().sound(SoundType.WOOD).strength(1.2f).mapColor(MapColor.WOOD).noOcclusion();
-        BlockBehaviour.Properties pillar = BlockBehaviour.Properties.of().sound(SoundType.STONE).strength(1.5F, 6.5F).mapColor(MapColor.STONE);
-
-        BONFIRE = registerBlock("bonfire", () -> new BonfireBlock(bonfire));
-        CHANDELIER = registerBlock("chandelier", () -> new ChandelierBlock(chandelier, false));
-        BRAZIER = registerBlock("brazier", () -> new BrazierBlock(brazier, false));
-        SOUL_BONFIRE = registerBlock("soul_bonfire", () -> new BonfireBlock(soul_bonfire));
-        SOUL_CHANDELIER = registerBlock("soul_chandelier", () -> new ChandelierBlock(soul_chandelier, true));
-        SOUL_BRAZIER = registerBlock("soul_brazier", () -> new BrazierBlock(soul_brazier, true));
-        BAR_PANEL = registerBlock("bar_panel", () -> new BarPanelBlock(bar_panel));
-        LATTICE = registerBlock("lattice", () -> new LatticeBlock(lattice));
-        CHAIN = registerBlock("chain", () -> new ChainBlock(chainProperties));
-        STONE_PILLAR = registerBlock("stone_pillar", () -> new PillarBlock(pillar));
-        ROCKY_DIRT = registerBlock("rocky_dirt", RockyDirtBlock::new);
+        BONFIRE = registerBlock("bonfire", () -> new BonfireBlock(baseProps("bonfire")
+                .sound(SoundType.WOOL).strength(0).mapColor(MapColor.FIRE)
+                .pushReaction(PushReaction.DESTROY).replaceable().noCollision()
+                .lightLevel(state -> 15).noLootTable()));
+        SOUL_BONFIRE = registerBlock("soul_bonfire", () -> new BonfireBlock(baseProps("soul_bonfire")
+                .sound(SoundType.WOOL).strength(0).mapColor(MapColor.COLOR_CYAN)
+                .pushReaction(PushReaction.DESTROY).replaceable().noCollision()
+                .lightLevel(state -> 14).noLootTable()));
+        CHANDELIER = registerBlock("chandelier", () -> new ChandelierBlock(baseProps("chandelier")
+                .sound(SoundType.WOOD).strength(0.3f).pushReaction(PushReaction.DESTROY)
+                .replaceable().noCollision().noOcclusion().lightLevel(state -> 15), false));
+        SOUL_CHANDELIER = registerBlock("soul_chandelier", () -> new ChandelierBlock(baseProps("soul_chandelier")
+                .sound(SoundType.WOOD).strength(0.3f).pushReaction(PushReaction.DESTROY)
+                .replaceable().noCollision().noOcclusion().lightLevel(state -> 11), true));
+        BRAZIER = registerBlock("brazier", () -> new BrazierBlock(baseProps("brazier")
+                .sound(SoundType.METAL).strength(3.0f).mapColor(MapColor.METAL).noOcclusion()
+                .lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 15 : 0), false));
+        SOUL_BRAZIER = registerBlock("soul_brazier", () -> new BrazierBlock(baseProps("soul_brazier")
+                .sound(SoundType.METAL).strength(3.0f).mapColor(MapColor.METAL).noOcclusion()
+                .lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 10 : 0), true));
+        BAR_PANEL = registerBlock("bar_panel", () -> new BarPanelBlock(baseProps("bar_panel")
+                .sound(SoundType.METAL).strength(5.0f).mapColor(MapColor.METAL).noOcclusion()));
+        LATTICE = registerBlock("lattice", () -> new LatticeBlock(baseProps("lattice")
+                .sound(SoundType.WOOD).strength(1.2f).mapColor(MapColor.WOOD).noOcclusion()));
+        CHAIN = registerBlock("chain", () -> new ChainBlock(baseProps("chain")
+                .mapColor(MapColor.METAL).strength(4.3F).sound(SoundType.METAL).noOcclusion()));
+        STONE_PILLAR = registerBlock("stone_pillar", () -> new PillarBlock(baseProps("stone_pillar")
+                .sound(SoundType.STONE).strength(1.5F, 6.5F).mapColor(MapColor.STONE)));
+        ROCKY_DIRT = registerBlock("rocky_dirt", () -> new RockyDirtBlock(baseProps("rocky_dirt")));
 
         ImmutableMap.Builder<WoodType, BlockWrapper<BeamBlock>> beams = new ImmutableMap.Builder<>();
         ImmutableMap.Builder<WoodType, BlockWrapper<PalisadeBlock>> palisades = new ImmutableMap.Builder<>();
@@ -70,11 +87,16 @@ public class DBBlocks {
 
         for (WoodType woodType : VanillaWoodTypes.VANILLA) {
             MapColor mapColor = VanillaWoodTypes.getPlanks(woodType).defaultMapColor();
-            if (woodType != WoodType.BAMBOO)
-                beams.put(woodType, registerBlock(DBNames.name(woodType, BEAM), () -> (BeamBlock) createDecorativeBlock(woodType, mapColor, BEAM)));
-            palisades.put(woodType, registerBlock(DBNames.name(woodType, PALISADE), () -> (PalisadeBlock) createDecorativeBlock(woodType, mapColor, PALISADE)));
-            supports.put(woodType, registerBlock(DBNames.name(woodType, SUPPORT), () -> (SupportBlock) createDecorativeBlock(woodType, mapColor, SUPPORT)));
-            seats.put(woodType, registerBlock(DBNames.name(woodType, SEAT), () -> (SeatBlock) createDecorativeBlock(woodType, mapColor, SEAT)));
+            if (woodType != WoodType.BAMBOO) {
+                String beamName = DBNames.name(woodType, BEAM);
+                beams.put(woodType, registerBlock(beamName, () -> (BeamBlock) createDecorativeBlock(beamName, woodType, mapColor, BEAM)));
+            }
+            String palisadeName = DBNames.name(woodType, PALISADE);
+            palisades.put(woodType, registerBlock(palisadeName, () -> (PalisadeBlock) createDecorativeBlock(palisadeName, woodType, mapColor, PALISADE)));
+            String supportName = DBNames.name(woodType, SUPPORT);
+            supports.put(woodType, registerBlock(supportName, () -> (SupportBlock) createDecorativeBlock(supportName, woodType, mapColor, SUPPORT)));
+            String seatName = DBNames.name(woodType, SEAT);
+            seats.put(woodType, registerBlock(seatName, () -> (SeatBlock) createDecorativeBlock(seatName, woodType, mapColor, SEAT)));
         }
         BEAMS = beams.build();
         PALISADES = palisades.build();
@@ -86,8 +108,8 @@ public class DBBlocks {
     public static void init() {
     }
 
-    public static IWoodenBlock createDecorativeBlock(WoodType wood, MapColor mapColor, WoodDecorativeBlockTypes woodDecorativeBlockType) {
-        BlockBehaviour.Properties properties = BlockBehaviour.Properties.of()
+    public static IWoodenBlock createDecorativeBlock(String name, WoodType wood, MapColor mapColor, WoodDecorativeBlockTypes woodDecorativeBlockType) {
+        BlockBehaviour.Properties properties = baseProps(name)
                 .mapColor(mapColor)
                 .sound(wood.soundType());
         if (!VanillaWoodTypes.isNetherWood(wood)) {

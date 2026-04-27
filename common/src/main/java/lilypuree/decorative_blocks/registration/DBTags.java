@@ -2,7 +2,7 @@ package lilypuree.decorative_blocks.registration;
 
 import lilypuree.decorative_blocks.Constants;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -77,7 +77,7 @@ public class DBTags {
         Fluids.init();
     }
 
-    private static ResourceLocation id(String path) {
-        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, path);
+    private static Identifier id(String path) {
+        return Identifier.fromNamespaceAndPath(Constants.MOD_ID, path);
     }
 }
