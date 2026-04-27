@@ -81,6 +81,10 @@ subprojects {
         it.options.getRelease().set(21)
     }
 
+    tasks.withType(Test).configureEach {
+        failOnNoDiscoveredTests = false
+    }
+
     processResources {
         def expandProps = [
                 "version"                           : version,
