@@ -3,9 +3,7 @@
   "category": "building",
   "group": "decorative_palisades",
   "key": {
-    "x": {
-      "item": "minecraft:mangrove_log"
-    }
+    "x": "minecraft:mangrove_log"
   },
   "pattern": [
     "xx "

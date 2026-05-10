@@ -3,9 +3,7 @@
   "category": "building",
   "group": "decorative_beams",
   "key": {
-    "x": {
-      "item": "minecraft:stripped_warped_stem"
-    }
+    "x": "minecraft:stripped_warped_stem"
   },
   "pattern": [
     " x ",

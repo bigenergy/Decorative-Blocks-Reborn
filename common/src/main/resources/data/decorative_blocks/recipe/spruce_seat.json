@@ -3,12 +3,8 @@
   "category": "building",
   "group": "decorative_seats",
   "key": {
-    "x": {
-      "item": "minecraft:spruce_slab"
-    },
-    "y": {
-      "item": "minecraft:spruce_fence"
-    }
+    "x": "minecraft:spruce_slab",
+    "y": "minecraft:spruce_fence"
   },
   "pattern": [
     "x  ",

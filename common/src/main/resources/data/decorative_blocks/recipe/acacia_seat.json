@@ -3,12 +3,8 @@
   "category": "building",
   "group": "decorative_seats",
   "key": {
-    "x": {
-      "item": "minecraft:acacia_slab"
-    },
-    "y": {
-      "item": "minecraft:acacia_fence"
-    }
+    "x": "minecraft:acacia_slab",
+    "y": "minecraft:acacia_fence"
   },
   "pattern": [
     "x  ",

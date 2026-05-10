@@ -3,9 +3,7 @@
   "category": "building",
   "group": "decorative_palisades",
   "key": {
-    "x": {
-      "item": "minecraft:dark_oak_log"
-    }
+    "x": "minecraft:dark_oak_log"
   },
   "pattern": [
     "xx "

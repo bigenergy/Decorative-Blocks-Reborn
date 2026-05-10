@@ -3,9 +3,7 @@
   "category": "building",
   "group": "decorative_supports",
   "key": {
-    "x": {
-      "item": "minecraft:birch_planks"
-    }
+    "x": "minecraft:birch_planks"
   },
   "pattern": [
     "xx ",

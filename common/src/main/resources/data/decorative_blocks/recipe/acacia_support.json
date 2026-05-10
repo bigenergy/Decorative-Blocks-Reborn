@@ -3,9 +3,7 @@
   "category": "building",
   "group": "decorative_supports",
   "key": {
-    "x": {
-      "item": "minecraft:acacia_planks"
-    }
+    "x": "minecraft:acacia_planks"
   },
   "pattern": [
     "xx ",

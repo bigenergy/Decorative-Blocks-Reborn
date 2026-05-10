@@ -3,12 +3,8 @@
   "category": "building",
   "group": "decorative_seats",
   "key": {
-    "x": {
-      "item": "minecraft:dark_oak_slab"
-    },
-    "y": {
-      "item": "minecraft:dark_oak_fence"
-    }
+    "x": "minecraft:dark_oak_slab",
+    "y": "minecraft:dark_oak_fence"
   },
   "pattern": [
     "x  ",

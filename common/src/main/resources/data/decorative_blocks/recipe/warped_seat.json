@@ -3,12 +3,8 @@
   "category": "building",
   "group": "decorative_seats",
   "key": {
-    "x": {
-      "item": "minecraft:warped_slab"
-    },
-    "y": {
-      "item": "minecraft:warped_fence"
-    }
+    "x": "minecraft:warped_slab",
+    "y": "minecraft:warped_fence"
   },
   "pattern": [
     "x  ",

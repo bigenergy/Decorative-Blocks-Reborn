@@ -3,9 +3,7 @@
   "category": "building",
   "group": "decorative_supports",
   "key": {
-    "x": {
-      "item": "minecraft:dark_oak_planks"
-    }
+    "x": "minecraft:dark_oak_planks"
   },
   "pattern": [
     "xx ",

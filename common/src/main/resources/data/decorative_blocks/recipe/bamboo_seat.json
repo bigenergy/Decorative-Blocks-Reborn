@@ -3,12 +3,8 @@
   "category": "building",
   "group": "decorative_seats",
   "key": {
-    "x": {
-      "item": "minecraft:bamboo_slab"
-    },
-    "y": {
-      "item": "minecraft:bamboo_fence"
-    }
+    "x": "minecraft:bamboo_slab",
+    "y": "minecraft:bamboo_fence"
   },
   "pattern": [
     "x  ",

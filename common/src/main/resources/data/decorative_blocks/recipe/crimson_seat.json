@@ -3,12 +3,8 @@
   "category": "building",
   "group": "decorative_seats",
   "key": {
-    "x": {
-      "item": "minecraft:crimson_slab"
-    },
-    "y": {
-      "item": "minecraft:crimson_fence"
-    }
+    "x": "minecraft:crimson_slab",
+    "y": "minecraft:crimson_fence"
   },
   "pattern": [
     "x  ",

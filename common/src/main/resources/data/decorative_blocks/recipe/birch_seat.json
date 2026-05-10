@@ -3,12 +3,8 @@
   "category": "building",
   "group": "decorative_seats",
   "key": {
-    "x": {
-      "item": "minecraft:birch_slab"
-    },
-    "y": {
-      "item": "minecraft:birch_fence"
-    }
+    "x": "minecraft:birch_slab",
+    "y": "minecraft:birch_fence"
   },
   "pattern": [
     "x  ",

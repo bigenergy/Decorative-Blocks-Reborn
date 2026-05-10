@@ -3,9 +3,7 @@
   "category": "building",
   "group": "decorative_palisades",
   "key": {
-    "x": {
-      "item": "minecraft:crimson_stem"
-    }
+    "x": "minecraft:crimson_stem"
   },
   "pattern": [
     "xx "

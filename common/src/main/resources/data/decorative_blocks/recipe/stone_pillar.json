@@ -1,9 +1,7 @@
 {
   "type": "minecraft:stonecutting",
   "count": 1,
-  "ingredient": {
-    "item": "minecraft:stone"
-  },
+  "ingredient": "minecraft:stone",
   "result": {
     "id": "decorative_blocks:stone_pillar"
   }

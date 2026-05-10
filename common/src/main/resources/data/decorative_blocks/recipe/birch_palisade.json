@@ -3,9 +3,7 @@
   "category": "building",
   "group": "decorative_palisades",
   "key": {
-    "x": {
-      "item": "minecraft:birch_log"
-    }
+    "x": "minecraft:birch_log"
   },
   "pattern": [
     "xx "

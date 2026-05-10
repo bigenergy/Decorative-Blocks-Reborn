@@ -3,12 +3,8 @@
   "category": "building",
   "group": "decorative_seats",
   "key": {
-    "x": {
-      "item": "minecraft:mangrove_slab"
-    },
-    "y": {
-      "item": "minecraft:mangrove_fence"
-    }
+    "x": "minecraft:mangrove_slab",
+    "y": "minecraft:mangrove_fence"
   },
   "pattern": [
     "x  ",

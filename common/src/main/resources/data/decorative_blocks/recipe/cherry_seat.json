@@ -3,12 +3,8 @@
   "category": "building",
   "group": "decorative_seats",
   "key": {
-    "x": {
-      "item": "minecraft:cherry_slab"
-    },
-    "y": {
-      "item": "minecraft:cherry_fence"
-    }
+    "x": "minecraft:cherry_slab",
+    "y": "minecraft:cherry_fence"
   },
   "pattern": [
     "x  ",

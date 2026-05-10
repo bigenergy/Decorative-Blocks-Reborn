@@ -3,9 +3,7 @@
   "category": "building",
   "group": "decorative_supports",
   "key": {
-    "x": {
-      "item": "minecraft:warped_planks"
-    }
+    "x": "minecraft:warped_planks"
   },
   "pattern": [
     "xx ",

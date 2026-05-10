@@ -6,12 +6,8 @@
     "##"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:iron_nugget"
-    },
-    "i": {
-      "item": "minecraft:iron_ingot"
-    }
+    "#": "minecraft:iron_nugget",
+    "i": "minecraft:iron_ingot"
   },
   "result": {
     "id": "decorative_blocks:chain",

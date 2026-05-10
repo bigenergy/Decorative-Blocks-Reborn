@@ -3,9 +3,7 @@
   "category": "building",
   "group": "decorative_supports",
   "key": {
-    "x": {
-      "item": "minecraft:cherry_planks"
-    }
+    "x": "minecraft:cherry_planks"
   },
   "pattern": [
     "xx ",

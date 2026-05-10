@@ -3,12 +3,8 @@
   "category": "building",
   "group": "decorative_seats",
   "key": {
-    "x": {
-      "item": "minecraft:jungle_slab"
-    },
-    "y": {
-      "item": "minecraft:jungle_fence"
-    }
+    "x": "minecraft:jungle_slab",
+    "y": "minecraft:jungle_fence"
   },
   "pattern": [
     "x  ",

@@ -3,9 +3,7 @@
   "category": "building",
   "group": "decorative_beams",
   "key": {
-    "x": {
-      "item": "minecraft:stripped_acacia_log"
-    }
+    "x": "minecraft:stripped_acacia_log"
   },
   "pattern": [
     " x ",

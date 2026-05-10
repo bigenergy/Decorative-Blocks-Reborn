@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "decorative_chandeliers",
   "key": {
-    "#": {
-      "item": "minecraft:soul_torch"
-    }
+    "#": "minecraft:soul_torch"
   },
   "pattern": [
     "##",

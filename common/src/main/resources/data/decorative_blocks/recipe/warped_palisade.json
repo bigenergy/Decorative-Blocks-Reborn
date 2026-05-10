@@ -3,9 +3,7 @@
   "category": "building",
   "group": "decorative_palisades",
   "key": {
-    "x": {
-      "item": "minecraft:warped_stem"
-    }
+    "x": "minecraft:warped_stem"
   },
   "pattern": [
     "xx "

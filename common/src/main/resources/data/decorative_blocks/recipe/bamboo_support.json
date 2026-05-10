@@ -3,9 +3,7 @@
   "category": "building",
   "group": "decorative_supports",
   "key": {
-    "x": {
-      "item": "minecraft:bamboo_planks"
-    }
+    "x": "minecraft:bamboo_planks"
   },
   "pattern": [
     "xx ",
