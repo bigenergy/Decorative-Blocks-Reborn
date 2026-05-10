@@ -1,0 +1,10 @@
+{
+  "values": {
+    "#decorative_blocks:beams_that_burn": { "burn_time": 300 },
+    "#decorative_blocks:palisades_that_burn": { "burn_time": 300 },
+    "#decorative_blocks:seats_that_burn": { "burn_time": 300 },
+    "#decorative_blocks:supports_that_burn": { "burn_time": 300 },
+    "#decorative_blocks:chandeliers": { "burn_time": 1600 },
+    "decorative_blocks:lattice": { "burn_time": 100 }
+  }
+}

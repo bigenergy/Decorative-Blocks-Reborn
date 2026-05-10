@@ -12,6 +12,8 @@ import net.neoforged.neoforge.registries.RegisterEvent;
 public class DecorativeBlocks {
 
     public DecorativeBlocks(IEventBus modBus) {
+        // Force CommonAPI <clinit> NOW (registers game rule) — must happen before GameRules registry freezes.
+        lilypuree.decorative_blocks.CommonAPI.bootstrap();
         DBTags.init();
         Registration.init();
         DBBlocks.init();

@@ -7,6 +7,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -27,16 +28,16 @@ public abstract class ItemEntityMixin extends Entity {
         super($$0, $$1);
     }
 
-    @Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
-    public void onHurt(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "hurtServer", at = @At("HEAD"), cancellable = true)
+    public void onHurt(ServerLevel serverLevel, DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (source == this.damageSources().inFire() && this.getItem().is(DBTags.Items.BONFIRE_ACTIVATORS)) {
-            Level level = this.level();
-            if (level.isClientSide() || this.isRemoved()) cir.setReturnValue(false);
-            else {
-                Block block = level.getBlockState(this.blockPosition()).getBlock();
+            if (this.isRemoved()) {
+                cir.setReturnValue(false);
+            } else {
+                Block block = serverLevel.getBlockState(this.blockPosition()).getBlock();
                 if (CommonAPI.bonfireMap.containsKey(block)) {
-                    level.setBlockAndUpdate(this.blockPosition(), CommonAPI.bonfireMap.get(block).defaultBlockState());
-                    level.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0f, 0.7f);
+                    serverLevel.setBlockAndUpdate(this.blockPosition(), CommonAPI.bonfireMap.get(block).defaultBlockState());
+                    serverLevel.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0f, 0.7f);
                     this.discard();
                     cir.setReturnValue(true);
                 }

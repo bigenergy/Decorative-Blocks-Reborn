@@ -37,7 +37,8 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
     
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
-    modImplementation "curse.maven:soul-fire-d-662413:7365043"
+    // Soul Fire'd disabled — no 1.21.11 build available yet (compat code stubs to vanilla fire)
+    // modImplementation "curse.maven:soul-fire-d-662413:7365043"
 
     
 //    modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")

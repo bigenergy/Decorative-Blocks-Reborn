@@ -60,7 +60,8 @@ public class Callbacks {
 
 
     private static InteractionResult shearThatch(Player player, Level level, ItemStack itemStack, BlockPos pos, Block block) {
-        boolean disabled = level instanceof net.minecraft.server.level.ServerLevel sl && sl.getGameRules().get(CommonAPI.RULE_DISABLE_THATCH);
+        // TODO 1.21.11 port: re-add disable_thatch gamerule via NeoForge's proper registration path (or config).
+        boolean disabled = false;
         if (!disabled) {
             level.setBlockAndUpdate(pos, CommonAPI.shearMap.get(block).getLiquidBlock().defaultBlockState());
             level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);

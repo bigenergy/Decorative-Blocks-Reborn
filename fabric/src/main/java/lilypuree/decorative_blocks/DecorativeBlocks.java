@@ -11,6 +11,7 @@ public class DecorativeBlocks implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        CommonAPI.bootstrap();
         DBTags.init();
         Registration.init();
         DBBlocks.init();
