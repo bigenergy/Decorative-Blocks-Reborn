@@ -111,7 +111,8 @@ public class DBBlocks {
     public static IWoodenBlock createDecorativeBlock(String name, WoodType wood, MapColor mapColor, WoodDecorativeBlockTypes woodDecorativeBlockType) {
         BlockBehaviour.Properties properties = baseProps(name)
                 .mapColor(mapColor)
-                .sound(wood.soundType());
+                .sound(wood.soundType())
+                .noOcclusion(); // non-full-cube — must not cull neighbor faces
         if (!VanillaWoodTypes.isNetherWood(wood)) {
             properties.ignitedByLava();
         }

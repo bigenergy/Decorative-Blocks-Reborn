@@ -1,5 +1,6 @@
 {
   "parent": "decorative_blocks:custom/chandelier",
+  "render_type": "minecraft:cutout",
   "textures": {
     "particle": "decorative_blocks:block/chandelier_base",
     "torch2": "decorative_blocks:block/soul_torch_2",

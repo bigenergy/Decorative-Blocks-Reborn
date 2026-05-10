@@ -1,5 +1,6 @@
 {
   "parent": "decorative_blocks:custom/brazier",
+  "render_type": "minecraft:cutout",
   "textures": {
     "all": "decorative_blocks:block/brazier_base",
     "particle": "decorative_blocks:block/brazier_base",

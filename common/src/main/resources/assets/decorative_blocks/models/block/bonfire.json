@@ -1,4 +1,5 @@
 {
+  "render_type": "minecraft:cutout",
   "__comment": "Designed by Stohun with Cubik Studio - https://cubik.studio",
   "ambientocclusion": false,
   "textures": {

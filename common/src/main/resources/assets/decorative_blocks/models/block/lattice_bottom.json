@@ -1,3 +1,4 @@
 {
-  "parent": "decorative_blocks:custom/lattice_bottom"
+  "parent": "decorative_blocks:custom/lattice_bottom",
+  "render_type": "minecraft:cutout"
 }

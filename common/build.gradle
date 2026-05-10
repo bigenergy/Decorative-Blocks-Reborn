@@ -18,8 +18,7 @@ dependencies {
     compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
 
-    // Soul Fire'd disabled — no 1.21.11 build available yet (compat code stubs to vanilla fire)
-    // compileOnly("curse.maven:soul-fire-d-662413:6248773")
+    // Soul Fire'd disabled — compat code stubs to vanilla fire
 }
 
 publishing {

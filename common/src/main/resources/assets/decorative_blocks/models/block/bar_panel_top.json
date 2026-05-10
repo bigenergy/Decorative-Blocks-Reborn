@@ -1,5 +1,6 @@
 {
   "parent": "decorative_blocks:custom/bar_panel_top",
+  "render_type": "minecraft:cutout",
   "textures": {
     "end": "decorative_blocks:block/bar_panel_end",
     "particle": "decorative_blocks:block/bar_panel_side",

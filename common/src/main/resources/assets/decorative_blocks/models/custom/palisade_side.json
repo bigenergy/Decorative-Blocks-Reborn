@@ -21,7 +21,8 @@
             11,
             16
           ],
-          "texture": "#end"
+          "texture": "#end",
+          "cullface": "down"
         },
         "up": {
           "uv": [
@@ -39,7 +40,8 @@
             11,
             16
           ],
-          "texture": "#side"
+          "texture": "#side",
+          "cullface": "north"
         },
         "south": {
           "uv": [

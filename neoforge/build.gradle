@@ -45,8 +45,7 @@ dependencies {
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
     // at runtime, use the full JEI jar
     runtimeOnly "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
-    // Soul Fire'd disabled — no 1.21.11 build available yet (compat code stubs to vanilla fire)
-    // implementation "curse.maven:soul-fire-d-662413:7365044"
+    // Soul Fire'd disabled — compat code stubs to vanilla fire (see neoforge/build.gradle history for the dep line)
 }
 
 // NeoGradle compiles the game, but we don't want to add our common code to the game's code

@@ -1,5 +1,6 @@
 {
   "parent": "decorative_blocks:custom/chain",
+  "render_type": "minecraft:cutout",
   "textures": {
     "particle": "decorative_blocks:block/chain",
     "texture": "decorative_blocks:block/chain"
