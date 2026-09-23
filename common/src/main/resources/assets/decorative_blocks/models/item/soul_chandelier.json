@@ -3,7 +3,8 @@
   "parent": "block/block",
   "textures": {
     "torch": "decorative_blocks:block/soul_torch",
-    "base": "decorative_blocks:block/chandelier_base"
+    "base": "decorative_blocks:block/chandelier_base",
+    "particle": "decorative_blocks:block/chandelier_base"
   },
   "elements": [
     {
@@ -242,7 +243,7 @@
         "up": {
           "uv": [
             2.999999,
-            0.000001907,
+            1.907e-06,
             4.999999,
             16
           ],
@@ -268,7 +269,7 @@
         },
         "west": {
           "uv": [
-            0.000001907,
+            1.907e-06,
             3,
             16,
             5
@@ -312,7 +313,7 @@
         "up": {
           "uv": [
             11,
-            0.000001907,
+            1.907e-06,
             13,
             16
           ],

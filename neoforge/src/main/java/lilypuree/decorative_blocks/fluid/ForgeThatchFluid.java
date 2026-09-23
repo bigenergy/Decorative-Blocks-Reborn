@@ -21,7 +21,7 @@ public class ForgeThatchFluid {
 
         public Flowing(FluidReferenceHolder referenceHolder) {
             super(referenceHolder);
-            this.fluidType = new DBFluidType(FLUID_PROPERTIES, referenceHolder.thatchStillTexture(), referenceHolder.thatchFlowingTexture(), referenceHolder.thatchStillTexture(), referenceHolder.color());
+            this.fluidType = new DBFluidType(FLUID_PROPERTIES, referenceHolder.color());
         }
 
         @Override
@@ -35,7 +35,7 @@ public class ForgeThatchFluid {
 
         public Source(FluidReferenceHolder referenceHolder) {
             super(referenceHolder);
-            this.fluidType = new DBFluidType(FLUID_PROPERTIES, referenceHolder.thatchStillTexture(), referenceHolder.thatchFlowingTexture(), referenceHolder.thatchStillTexture(), referenceHolder.color());
+            this.fluidType = new DBFluidType(FLUID_PROPERTIES, referenceHolder.color());
         }
 
         @Override

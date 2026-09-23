@@ -90,7 +90,7 @@ public class BrazierBlock extends Block implements SimpleWaterloggedBlock {
             if (hit.getDirection() == Direction.UP && stack.getItem() == Items.FLINT_AND_STEEL || stack.getItem() == Items.FIRE_CHARGE) {
 
                 SoundEvent sound = (stack.getItem() == Items.FIRE_CHARGE) ? SoundEvents.FIRECHARGE_USE : SoundEvents.FLINTANDSTEEL_USE;
-                level.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, level.random.nextFloat() * 0.4F + 0.8F);
+                level.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
 
                 level.setBlockAndUpdate(pos, state.setValue(LIT, true));
                 return InteractionResult.SUCCESS;
