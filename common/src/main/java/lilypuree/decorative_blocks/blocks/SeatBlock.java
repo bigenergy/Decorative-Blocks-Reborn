@@ -181,7 +181,7 @@ public class SeatBlock extends HorizontalDirectionalBlock implements SimpleWater
     }
 
     private static boolean isPlayerInRange(Player player, BlockPos pos) {
-        Vec3 position = pos.getCenter();
+        Vec3 position = Vec3.atCenterOf(pos);
         int blockReachDistance = 2;
 
         AABB range = AABB.ofSize(position, blockReachDistance, blockReachDistance, blockReachDistance);

@@ -14,7 +14,7 @@ displayName = "${mod_name}" #mandatory
 # A URL for the "homepage" for this mod, displayed in the mod UI
 #displayURL="http://example.com/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
-logoFile = "logo.png" #optional
+iconFile = "logo.png" #optional (square icon; logoFile is deprecated since NeoForge 26.2)
 credits = "Thanks for stohun for the amazing models" #optional
 authors = "${mod_author}" #optional
 description = '''${mod_description}'''
