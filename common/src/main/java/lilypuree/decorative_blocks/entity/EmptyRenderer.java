@@ -11,7 +11,7 @@ public class EmptyRenderer extends EntityRenderer<DummyEntityForSitting, EntityR
     }
 
     @Override
-    public boolean shouldRender(DummyEntityForSitting livingEntityIn, Frustum camera, double camX, double camY, double camZ) {
+    public boolean shouldRender(DummyEntityForSitting livingEntityIn, Frustum camera, double camX, double camY, double camZ, float partialTicks) {
         return false;
     }
 

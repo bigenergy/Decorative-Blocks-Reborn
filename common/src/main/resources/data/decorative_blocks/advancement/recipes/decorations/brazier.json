@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "decorative_blocks:brazier"
+        "recipes": "decorative_blocks:brazier"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

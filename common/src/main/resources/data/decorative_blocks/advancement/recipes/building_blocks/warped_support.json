@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "decorative_blocks:warped_support"
+        "recipes": "decorative_blocks:warped_support"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

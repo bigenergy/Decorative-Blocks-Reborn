@@ -1,8 +1,6 @@
 package lilypuree.decorative_blocks.blocks;
 
 import com.google.common.collect.ImmutableMap;
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import lilypuree.decorative_blocks.blocks.state.ModBlockProperties;
 import lilypuree.decorative_blocks.blocks.state.SupportFaceShape;
 import lilypuree.decorative_blocks.items.SwitchableBlockItem;
@@ -37,10 +35,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class SupportBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock, IWoodenBlock {
-    public static final MapCodec<SupportBlock> CODEC = RecordCodecBuilder.mapCodec(
-            inst -> inst.group(WoodType.CODEC.fieldOf("wood_type").forGetter(block -> block.woodType), propertiesCodec()).apply(inst, SupportBlock::new)
-    );
-
     private static final double d0 = 3D;
     private static final double d1 = 13D;
     private static final double d2 = 4D;
@@ -186,7 +180,6 @@ public class SupportBlock extends HorizontalDirectionalBlock implements SimpleWa
         return Shapes.or(horizontal, vertical);
     }
 
-
     static {
         verticalSmall = new EnumMap<>(Direction.class);
         verticalLarge = new EnumMap<>(Direction.class);
@@ -198,10 +191,5 @@ public class SupportBlock extends HorizontalDirectionalBlock implements SimpleWa
             verticalSmall.put(dir, Block.box((1 - x * x) * d2 + x * x * (d1 / 2 - d1 / 2 * x), 0, (1 - z * z) * d2 + z * z * (d1 / 2 - d1 / 2 * z),
                     (1 - x * x) * d3 + x * x * ((d0 + 16) / 2 + (d0 - 16) / 2 * x), 16, (1 - z * z) * d3 + z * z * ((d0 + 16) / 2 + (d0 - 16) / 2 * z)));
         });
-    }
-
-    @Override
-    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
-        return CODEC;
     }
 }

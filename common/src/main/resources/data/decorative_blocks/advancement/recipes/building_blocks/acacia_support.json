@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "decorative_blocks:acacia_support"
+        "recipes": "decorative_blocks:acacia_support"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

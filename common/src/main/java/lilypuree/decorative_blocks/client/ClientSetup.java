@@ -15,7 +15,7 @@ import net.minecraft.client.resources.model.sprite.Material;
  */
 public class ClientSetup {
 
-    public static final KeyMapping switchItemState = new KeyMapping("key.decorative_blocks.switch_item_state", InputConstants.Type.KEYSYM, -1, KeyMapping.Category.INVENTORY);
+    public static final KeyMapping switchItemState = new KeyMapping("key.decorative_blocks.switch_item_state", InputConstants.Type.KEYBOARD, InputConstants.UNKNOWN.getValue(), KeyMapping.Category.INVENTORY);
 
     /**
      * Fluid textures are no longer supplied by loader-specific fluid handlers,

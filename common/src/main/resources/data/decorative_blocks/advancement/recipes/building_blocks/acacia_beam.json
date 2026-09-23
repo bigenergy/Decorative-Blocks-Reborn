@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "decorative_blocks:acacia_beam"
+        "recipes": "decorative_blocks:acacia_beam"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

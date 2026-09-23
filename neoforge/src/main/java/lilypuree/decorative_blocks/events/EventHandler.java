@@ -33,7 +33,7 @@ public class EventHandler {
         InteractionResult result = Callbacks.onUseItem(event.getLevel(), event.getEntity(), event.getItemStack());
         if (result != InteractionResult.PASS) {
             if (event.getLevel().isClientSide()) {
-                event.getEntity().swing(event.getHand());
+                event.getEntity().swing(event.getHand(), event.getItemStack().getInteractAnimation(), false);
             }
         }
     }
@@ -43,7 +43,7 @@ public class EventHandler {
         InteractionResult result = Callbacks.onRightClickBlock(event.getEntity(), event.getLevel(), event.getItemStack(), event.getHitVec());
         if (result != InteractionResult.PASS) {
             if (event.getLevel().isClientSide()) {
-                event.getEntity().swing(event.getHand());
+                event.getEntity().swing(event.getHand(), event.getItemStack().getInteractAnimation(), false);
             }
             event.setUseBlock(TriState.FALSE);
             event.setUseItem(TriState.FALSE);

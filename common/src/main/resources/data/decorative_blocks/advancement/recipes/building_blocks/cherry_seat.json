@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "decorative_blocks:cherry_seat"
+        "recipes": "decorative_blocks:cherry_seat"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

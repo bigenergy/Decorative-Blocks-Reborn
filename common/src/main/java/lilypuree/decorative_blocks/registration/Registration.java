@@ -38,7 +38,7 @@ public class Registration {
         BlockBehaviour.Properties thatchProperties = Block.Properties.of()
                 .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Constants.MOD_ID, "thatch")))
                 .liquid().replaceable().noCollision().randomTicks().noLootTable()
-                .mapColor(MapColor.COLOR_YELLOW).pushReaction(PushReaction.DESTROY).strength(100.0F);
+                .mapColor(MapColor.COLOR_YELLOW).pushReaction(PushReaction.POPPED).strength(100.0F);
 
         //using lambdas, not method references which will access the field values of FLOWING_THATCH and STILL_THATCH which are still null.
         referenceHolder = new ThatchFluid.FluidReferenceHolder(() -> Blocks.HAY_BLOCK, () -> Registration.THATCH_BLOCK.get(), () -> Registration.FLOWING_THATCH.get(), () -> Registration.STILL_THATCH.get(), thatchStillTexture, thatchFlowingTexture, 0xAC8D08);

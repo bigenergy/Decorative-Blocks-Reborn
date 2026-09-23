@@ -1,7 +1,5 @@
 package lilypuree.decorative_blocks.blocks;
 
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -21,14 +19,6 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 
 public class PalisadeBlock extends CrossCollisionBlock implements IWoodenBlock {
-    public static final MapCodec<PalisadeBlock> CODEC = RecordCodecBuilder.mapCodec(
-            inst -> inst.group(WoodType.CODEC.fieldOf("wood_type").forGetter(block -> block.woodType), propertiesCodec()).apply(inst, PalisadeBlock::new)
-    );
-    @Override
-    protected MapCodec<? extends CrossCollisionBlock> codec() {
-        return CODEC;
-    }
-    
     private WoodType woodType;
 
     public PalisadeBlock(WoodType woodType, Properties properties) {
@@ -89,6 +79,4 @@ public class PalisadeBlock extends CrossCollisionBlock implements IWoodenBlock {
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(NORTH, EAST, WEST, SOUTH, WATERLOGGED);
     }
-
-  
 }

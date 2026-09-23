@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "decorative_blocks:chain"
+        "recipes": "decorative_blocks:chain"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

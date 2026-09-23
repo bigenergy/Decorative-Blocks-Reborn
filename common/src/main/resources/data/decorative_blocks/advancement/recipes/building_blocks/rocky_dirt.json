@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "decorative_blocks:rocky_dirt"
+        "recipes": "decorative_blocks:rocky_dirt"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

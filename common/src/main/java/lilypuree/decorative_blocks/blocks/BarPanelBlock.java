@@ -1,6 +1,5 @@
 package lilypuree.decorative_blocks.blocks;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -17,13 +16,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BarPanelBlock extends TrapDoorBlock {
-    public static MapCodec<BarPanelBlock> CODEC = simpleCodec(BarPanelBlock::new);
-
-    @Override
-    public MapCodec<? extends TrapDoorBlock> codec() {
-        return CODEC;
-    }
-
     private static final double d0 = 3D;
     private static final double d1 = 16D - d0;
     protected static final VoxelShape EAST_OPEN_AABB = Block.box(0.0D, 0.0D, 0.0D, d0, 16.0D, 16.0D);

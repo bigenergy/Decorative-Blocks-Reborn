@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "decorative_blocks:chandelier"
+        "recipes": "decorative_blocks:chandelier"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

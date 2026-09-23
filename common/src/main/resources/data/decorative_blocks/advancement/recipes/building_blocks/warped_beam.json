@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "decorative_blocks:warped_beam"
+        "recipes": "decorative_blocks:warped_beam"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

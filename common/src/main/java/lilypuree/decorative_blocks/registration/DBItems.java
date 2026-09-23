@@ -13,8 +13,11 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProvider;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 
 import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 
 import static lilypuree.decorative_blocks.blocks.types.WoodDecorativeBlockTypes.*;
 
@@ -42,13 +45,23 @@ public class DBItems {
         return new Item.Properties().setId(itemKey(name));
     }
 
+    // Since 26.3 furnace fuel is an item component (cooking_fuel); the vanilla burn time providers
+    // also take care of the halved burn time in blast furnaces and smokers.
+    private static UnaryOperator<Item.Properties> fuel(ResourceKey<ContextIntProvider> burnTime) {
+        return properties -> properties.cookingFuel(burnTime);
+    }
+
+    private static UnaryOperator<Item.Properties> woodFuel(WoodType woodType) {
+        return VanillaWoodTypes.isNetherWood(woodType) ? UnaryOperator.identity() : fuel(ContextIntProviders.COOKING_TIME_WOOD_BLOCKS);
+    }
+
     static {
-        CHANDELIER = registerBlockItem("chandelier", DBBlocks.CHANDELIER);
-        SOUL_CHANDELIER = registerBlockItem("soul_chandelier", DBBlocks.SOUL_CHANDELIER);
+        CHANDELIER = registerBlockItem("chandelier", DBBlocks.CHANDELIER, fuel(ContextIntProviders.COOKING_TIME_COAL));
+        SOUL_CHANDELIER = registerBlockItem("soul_chandelier", DBBlocks.SOUL_CHANDELIER, fuel(ContextIntProviders.COOKING_TIME_COAL));
         BRAZIER = registerBlockItem("brazier", DBBlocks.BRAZIER);
         SOUL_BRAZIER = registerBlockItem("soul_brazier", DBBlocks.SOUL_BRAZIER);
         BAR_PANEL = registerBlockItem("bar_panel", DBBlocks.BAR_PANEL);
-        LATTICE = registerBlockItem("lattice", DBBlocks.LATTICE);
+        LATTICE = registerBlockItem("lattice", DBBlocks.LATTICE, fuel(ContextIntProviders.COOKING_TIME_WOOD_ITEMS_EXTRA_SMALL));
         CHAIN = registerBlockItem("chain", DBBlocks.CHAIN);
         STONE_PILLAR = registerBlockItem("stone_pillar", DBBlocks.STONE_PILLAR);
         ROCKY_DIRT = registerBlockItem("rocky_dirt", DBBlocks.ROCKY_DIRT);
@@ -58,13 +71,14 @@ public class DBItems {
         ImmutableMap.Builder<WoodType, ItemWrapper<SupportItem>> supports = new ImmutableMap.Builder<>();
         ImmutableMap.Builder<WoodType, ItemWrapper<SeatItem>> seats = new ImmutableMap.Builder<>();
         for (WoodType woodType : VanillaWoodTypes.VANILLA) {
+            UnaryOperator<Item.Properties> fuel = woodFuel(woodType);
             if (woodType != WoodType.BAMBOO)
-                beams.put(woodType, registerBlockItem(DBNames.name(woodType, BEAM), DBBlocks.BEAMS.get(woodType)));
+                beams.put(woodType, registerBlockItem(DBNames.name(woodType, BEAM), DBBlocks.BEAMS.get(woodType), fuel));
             final String seatName = DBNames.name(woodType, SEAT);
-            seats.put(woodType, registerItem(seatName, () -> new SeatItem(DBBlocks.SEATS.get(woodType).get(), itemProps(seatName))));
+            seats.put(woodType, registerItem(seatName, () -> new SeatItem(DBBlocks.SEATS.get(woodType).get(), fuel.apply(itemProps(seatName)))));
             final String supportName = DBNames.name(woodType, SUPPORT);
-            supports.put(woodType, registerItem(supportName, () -> new SupportItem(DBBlocks.SUPPORTS.get(woodType).get(), itemProps(supportName))));
-            palisades.put(woodType, registerBlockItem(DBNames.name(woodType, PALISADE), DBBlocks.PALISADES.get(woodType)));
+            supports.put(woodType, registerItem(supportName, () -> new SupportItem(DBBlocks.SUPPORTS.get(woodType).get(), fuel.apply(itemProps(supportName)))));
+            palisades.put(woodType, registerBlockItem(DBNames.name(woodType, PALISADE), DBBlocks.PALISADES.get(woodType), fuel));
         }
         BEAM_ITEMBLOCKS = beams.build();
         PALISADE_ITEMBLOCKS = palisades.build();
@@ -81,7 +95,11 @@ public class DBItems {
     }
 
     private static ItemWrapper<BlockItem> registerBlockItem(String name, BlockWrapper<?> block) {
-        return registerItem(name, () -> new BlockItem(block.get(), itemProps(name)));
+        return registerBlockItem(name, block, UnaryOperator.identity());
+    }
+
+    private static ItemWrapper<BlockItem> registerBlockItem(String name, BlockWrapper<?> block, UnaryOperator<Item.Properties> properties) {
+        return registerItem(name, () -> new BlockItem(block.get(), properties.apply(itemProps(name))));
     }
 
 }

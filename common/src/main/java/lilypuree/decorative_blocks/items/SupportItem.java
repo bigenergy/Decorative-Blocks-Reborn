@@ -1,6 +1,5 @@
 package lilypuree.decorative_blocks.items;
 
-import com.mojang.blaze3d.platform.InputConstants;
 import lilypuree.decorative_blocks.Constants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -24,8 +23,7 @@ public class SupportItem extends SwitchableBlockItem {
 
     @Override
     public void appendHoverText(ItemStack stack, Item.TooltipContext ctx, TooltipDisplay display, Consumer<Component> tooltip, TooltipFlag tooltipFlag) {
-        var win = Minecraft.getInstance().getWindow();
-        if (InputConstants.isKeyDown(win, org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_SHIFT) || InputConstants.isKeyDown(win, org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_SHIFT)) {
+        if (Minecraft.getInstance().hasShiftDown()) {
             tooltip.accept(Component.translatable("wiki.decorative_blocks.support.condition1"));
             tooltip.accept(Component.translatable("wiki.decorative_blocks.support.behavior1"));
             tooltip.accept(Component.literal(""));

@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "decorative_blocks:dark_oak_palisade"
+        "recipes": "decorative_blocks:dark_oak_palisade"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

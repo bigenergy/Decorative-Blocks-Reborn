@@ -52,17 +52,17 @@ public class DBBlocks {
     static {
         BONFIRE = registerBlock("bonfire", () -> new BonfireBlock(baseProps("bonfire")
                 .sound(SoundType.WOOL).strength(0).mapColor(MapColor.FIRE)
-                .pushReaction(PushReaction.DESTROY).replaceable().noCollision()
+                .pushReaction(PushReaction.POPPED).replaceable().noCollision()
                 .lightLevel(state -> 15).noLootTable()));
         SOUL_BONFIRE = registerBlock("soul_bonfire", () -> new BonfireBlock(baseProps("soul_bonfire")
                 .sound(SoundType.WOOL).strength(0).mapColor(MapColor.COLOR_CYAN)
-                .pushReaction(PushReaction.DESTROY).replaceable().noCollision()
+                .pushReaction(PushReaction.POPPED).replaceable().noCollision()
                 .lightLevel(state -> 14).noLootTable()));
         CHANDELIER = registerBlock("chandelier", () -> new ChandelierBlock(baseProps("chandelier")
-                .sound(SoundType.WOOD).strength(0.3f).pushReaction(PushReaction.DESTROY)
+                .sound(SoundType.WOOD).strength(0.3f).pushReaction(PushReaction.POPPED)
                 .replaceable().noCollision().noOcclusion().lightLevel(state -> 15), false));
         SOUL_CHANDELIER = registerBlock("soul_chandelier", () -> new ChandelierBlock(baseProps("soul_chandelier")
-                .sound(SoundType.WOOD).strength(0.3f).pushReaction(PushReaction.DESTROY)
+                .sound(SoundType.WOOD).strength(0.3f).pushReaction(PushReaction.POPPED)
                 .replaceable().noCollision().noOcclusion().lightLevel(state -> 11), true));
         BRAZIER = registerBlock("brazier", () -> new BrazierBlock(baseProps("brazier")
                 .sound(SoundType.METAL).strength(3.0f).mapColor(MapColor.METAL).noOcclusion()
