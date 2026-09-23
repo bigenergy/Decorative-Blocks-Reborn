@@ -11,8 +11,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.gamerules.GameRule;
-import net.minecraft.world.level.gamerules.GameRuleCategory;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -37,21 +35,6 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
     public <I, T extends I> Supplier<T> register(Registry<I> registry, String name, Supplier<T> sup) {
         DeferredRegister<I> deferredRegister = (DeferredRegister<I>) registries.computeIfAbsent(registry, reg -> DeferredRegister.create(reg.key(), Constants.MOD_ID));
         return deferredRegister.register(name, sup);
-    }
-
-
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public GameRule<Boolean> registerGameRule(String name, GameRuleCategory category, boolean defaultValue) {
-        try {
-            java.lang.reflect.Method m = net.minecraft.world.level.gamerules.GameRules.class
-                    .getDeclaredMethod("registerBoolean", String.class, GameRuleCategory.class, boolean.class);
-            m.setAccessible(true);
-            return (GameRule<Boolean>) m.invoke(null, name, category, defaultValue);
-        } catch (ReflectiveOperationException e) {
-            throw new RuntimeException("Failed to register game rule " + name, e);
-        }
     }
 
     @Override

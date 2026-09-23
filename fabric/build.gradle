@@ -10,6 +10,10 @@ dependencies {
     implementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
     compileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
 
+    // Common sources (including the JEI plugin) are compiled here, so they need the API too
+    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+    runtimeOnly "mezz.jei:jei-${minecraft_version}-fabric:${jei_version}"
+
     // Soul Fire'd disabled — compat code stubs to vanilla fire
 }
 

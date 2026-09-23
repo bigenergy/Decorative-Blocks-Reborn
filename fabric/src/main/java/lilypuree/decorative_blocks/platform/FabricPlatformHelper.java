@@ -5,7 +5,6 @@ import lilypuree.decorative_blocks.FabricThatchFluidBlock;
 import lilypuree.decorative_blocks.entity.DummyEntityForSitting;
 import lilypuree.decorative_blocks.fluid.ThatchFluid;
 import lilypuree.decorative_blocks.platform.services.IPlatformHelper;
-import net.fabricmc.fabric.api.gamerule.v1.GameRuleBuilder;
 import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.fabricmc.loader.api.FabricLoader;
@@ -15,8 +14,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.gamerules.GameRule;
-import net.minecraft.world.level.gamerules.GameRuleCategory;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -34,12 +31,6 @@ public class FabricPlatformHelper implements IPlatformHelper {
     public <I, T extends I> Supplier<T> register(Registry<I> registry, String name, Supplier<T> sup) {
         T object = Registry.register(registry, Identifier.fromNamespaceAndPath(Constants.MOD_ID, name), sup.get());
         return () -> object;
-    }
-
-    @Override
-    public GameRule<Boolean> registerGameRule(String name, GameRuleCategory category, boolean defaultValue) {
-        return GameRuleBuilder.forBoolean(defaultValue).category(category)
-                .buildAndRegister(Identifier.fromNamespaceAndPath(Constants.MOD_ID, name));
     }
 
     @Override

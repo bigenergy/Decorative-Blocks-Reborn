@@ -122,5 +122,7 @@
   "item.decorative_blocks.bonfire": "Bonfire",
   "item.decorative_blocks.soul_bonfire": "Soul Bonfire",
   "item.decorative_blocks.lattice": "Lattice",
-  "item.decorative_blocks.thatch": "Thatch"
+  "item.decorative_blocks.thatch": "Thatch",
+  "gamerule.decorative_blocks.disable_thatch": "Disable thatch",
+  "gamerule.decorative_blocks.disable_thatch.description": "Prevents hay bales from being cut open into thatch with shears."
 }

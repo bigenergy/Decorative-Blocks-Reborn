@@ -20,6 +20,9 @@
     ],
     "client": [
       "lilypuree.decorative_blocks.ClientInitializer"
+    ],
+    "jei_mod_plugin": [
+      "lilypuree.decorative_blocks.compat.jei.DecorativeBlocksJEIPlugin"
     ]
   },
   "mixins": [

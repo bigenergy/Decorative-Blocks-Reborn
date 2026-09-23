@@ -19,6 +19,9 @@ dependencies {
     annotationProcessor group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.5.3'
     compileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
 
+    // JEI plugin (compat/jei) is written against the loader independent API
+    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+
     // Soul Fire'd disabled — compat code stubs to vanilla fire
 }
 

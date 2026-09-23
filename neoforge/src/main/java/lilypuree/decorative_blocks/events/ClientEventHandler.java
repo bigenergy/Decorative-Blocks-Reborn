@@ -8,7 +8,6 @@ import lilypuree.decorative_blocks.registration.Registration;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterFluidModelsEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
@@ -17,14 +16,6 @@ import net.neoforged.neoforge.fluids.FluidType;
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = Constants.MOD_ID)
 public class ClientEventHandler {
-
-    @SubscribeEvent
-    public static void clientSetup(FMLClientSetupEvent e) {
-        e.enqueueWork(() -> {
-            ClientSetup.initRenderLayers();
-            ClientSetup.initItemPropertyFunctions();
-        });
-    }
 
     @SubscribeEvent
     public static void onEntityRendererRegistry(EntityRenderersEvent.RegisterRenderers event) {

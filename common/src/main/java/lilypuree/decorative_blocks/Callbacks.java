@@ -7,6 +7,7 @@ import lilypuree.decorative_blocks.mixin.ItemAccessor;
 import lilypuree.decorative_blocks.platform.Services;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionResult;
@@ -60,8 +61,8 @@ public class Callbacks {
 
 
     private static InteractionResult shearThatch(Player player, Level level, ItemStack itemStack, BlockPos pos, Block block) {
-        // TODO 1.21.11 port: re-add disable_thatch gamerule via NeoForge's proper registration path (or config).
-        boolean disabled = false;
+        // Game rules only live on the server; the client predicts the default and gets corrected by the server.
+        boolean disabled = level instanceof ServerLevel serverLevel && serverLevel.getGameRules().get(CommonAPI.RULE_DISABLE_THATCH.get());
         if (!disabled) {
             level.setBlockAndUpdate(pos, CommonAPI.shearMap.get(block).getLiquidBlock().defaultBlockState());
             level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);

@@ -7,8 +7,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.gamerules.GameRule;
-import net.minecraft.world.level.gamerules.GameRuleCategory;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -21,8 +19,6 @@ public interface IPlatformHelper {
     boolean isModLoaded(String modid);
 
     <I, T extends I> Supplier<T> register(Registry<I> registry, String name, Supplier<T> sup);
-
-    GameRule<Boolean> registerGameRule(String name, GameRuleCategory category, boolean defaultValue);
 
     DummyEntityForSitting createDummyEntity(EntityType<DummyEntityForSitting> type, Level level);
 

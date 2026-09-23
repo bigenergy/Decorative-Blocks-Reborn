@@ -40,7 +40,8 @@ neoForge {
 dependencies {
     compileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
 
-    // JEI at runtime only (the JEI plugin class was removed during the 1.21.11 port)
+    // Common sources (including the JEI plugin) are compiled here, so they need the API too
+    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
     runtimeOnly "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
 
     // Soul Fire'd disabled — compat code stubs to vanilla fire

@@ -14,8 +14,6 @@ public class ClientInitializer implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         EntityRendererRegistry.register(Registration.DUMMY_ENTITY_TYPE.get(), EmptyRenderer::new);
-        ClientSetup.initRenderLayers();
-        ClientSetup.initItemPropertyFunctions();
 //        KeyBindingHelper.registerKeyBinding(ClientSetup.switchItemState);
         registerThatchlike(Registration.referenceHolder);
     }

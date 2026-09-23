@@ -122,5 +122,7 @@
   "item.decorative_blocks.bonfire": "Костёр",
   "item.decorative_blocks.soul_bonfire": "Костёр душ",
   "item.decorative_blocks.lattice": "Решётка",
-  "item.decorative_blocks.thatch": "Солома"
+  "item.decorative_blocks.thatch": "Солома",
+  "gamerule.decorative_blocks.disable_thatch": "Отключить солому",
+  "gamerule.decorative_blocks.disable_thatch.description": "Запрещает разрезать стог сена ножницами на солому."
 }
